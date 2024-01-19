@@ -8,8 +8,44 @@
 <body>
 <h1>My Super Fancy Spa</h1>
 <div id = "clientProfile">
+    <!-- Step 1: Add a h2 tag -->
+    <h2>My Profile</h2>
+    <!-- Step 2: Add a p tag and use th:text to bring in the value of name -->
+    <p th:text="${name}"></p>
+    <!-- Step 3: Add a p tag and use th:text to bring in the value of skintype -->
+    <p th:text="${skintype}"></p>
+    <!-- Step 4: Add a p tag and use th:text to bring in the value of manipedi -->
+    <p th:text="${manipedi}"></p>
 </div>
-<div id = "servicesMenu">
+    <div id = "servicesMenu">
+        <table>
+            <thead>
+            <tr>
+                <th>Facial Treatment</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Step 5: Use th:block and th:each to iteratively add rows for values in appropriateFacials -->
+            <th:block th:each="facial : ${appropriateFacials}">
+                <tr>
+                    <td th:text="${facial}"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+
+        <div th:if="${manipedi eq 'manicure'}">
+            <!-- If manipedi is "manicure", display the manicure description -->
+            <h3>Manicure</h3>
+            <div th:replace="fragments.html :: manicureDescription"></div>
+        </div>
+
+        <div th:if="${manipedi eq 'pedicure'}">
+            <!-- If manipedi is "pedicure", display the pedicure description -->
+            <h3>Pedicure</h3>
+            <div th:replace="fragments.html :: pedicureDescription"></div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
